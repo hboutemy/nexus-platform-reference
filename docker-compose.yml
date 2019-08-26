@@ -16,7 +16,7 @@ services:
        - nexus
       
    nexus:
-     image: 'sonatype/nexus3:3.17.0'
+     image: 'sonatype/nexus3:3.18.0'
      volumes:
        - '~/.demo-pv/nexus-data:/nexus-data'
      ports:
@@ -24,7 +24,7 @@ services:
        - '18443:18443'
 
    iq-server:
-     image: 'cmyanko/my-iq-server:1.68.0'
+     image: 'cmyanko/my-iq-server:1.71.0'
      build: ./iq-server
      volumes:
        - '~/.demo-pv/iq-data:/sonatype-work'

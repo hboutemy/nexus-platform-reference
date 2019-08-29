@@ -62,63 +62,63 @@ services:
   #     - -hooks=/etc/webhook/iq-consume.json
   #     - -hooks=/etc/webhook/quay-consume.json
 
-   victoria:
-     image: 'victoria:1.0.0-60'
-     build: ./victoria
-     volumes:
-       - '~/.demo-pv/victoria/db:/home/nexus/db'
-       - '~/.demo-pv/victoria/log:/home/nexus/log'
-       - '~/.demo-pv/victoria/tmp:/home/nexus/tmp'
-     ports:
-       - '8090:8090'
-       - '8091:8091'
-     depends_on:
-       - iq-server
+  #  victoria:
+  #    image: 'victoria:1.0.0-60'
+  #    build: ./victoria
+  #    volumes:
+  #      - '~/.demo-pv/victoria/db:/home/nexus/db'
+  #      - '~/.demo-pv/victoria/log:/home/nexus/log'
+  #      - '~/.demo-pv/victoria/tmp:/home/nexus/tmp'
+  #    ports:
+  #      - '8090:8090'
+  #      - '8091:8091'
+  #    depends_on:
+  #      - iq-server
 
-   anchore-engine:
-     image: docker.io/anchore/anchore-engine:latest
-     #privileged: true
-     depends_on:
-       - anchore-db
-     ports:
-       - "8228:8228"
-       - "8338:8338"
-     volumes:
-       - ~/.demo-pv/aevolume/config:/config/:z
-     logging:
-       driver: "json-file"
-       options:
-         max-size: 100m
-     environment:
-      # NOTE: this should be set to the same name as this service (e.g. anchore-engine)
-       - ANCHORE_HOST_ID=dockerhostid-anchore-engine
-       - ANCHORE_ENDPOINT_HOSTNAME=anchore-engine
-   anchore-db:
-     image: "postgres:9"
-     volumes:
-       - ~/.demo-pv/aevolume/db:/var/lib/postgresql/data/pgdata/:z
-     environment:
-       - POSTGRES_PASSWORD=mysecretpassword
-       - PGDATA=/var/lib/postgresql/data/pgdata/
-     logging:
-       driver: "json-file"
-       options:
-         max-size: 100m
-     #uncomment to expose a port to allow direct/external access to the DB, for debugging
-     #ports:
-     # - "2345:5432"
+  #  anchore-engine:
+  #    image: docker.io/anchore/anchore-engine:latest
+  #    #privileged: true
+  #    depends_on:
+  #      - anchore-db
+  #    ports:
+  #      - "8228:8228"
+  #      - "8338:8338"
+  #    volumes:
+  #      - ~/.demo-pv/aevolume/config:/config/:z
+  #    logging:
+  #      driver: "json-file"
+  #      options:
+  #        max-size: 100m
+  #    environment:
+  #     # NOTE: this should be set to the same name as this service (e.g. anchore-engine)
+  #      - ANCHORE_HOST_ID=dockerhostid-anchore-engine
+  #      - ANCHORE_ENDPOINT_HOSTNAME=anchore-engine
+  #  anchore-db:
+  #    image: "postgres:9"
+  #    volumes:
+  #      - ~/.demo-pv/aevolume/db:/var/lib/postgresql/data/pgdata/:z
+  #    environment:
+  #      - POSTGRES_PASSWORD=mysecretpassword
+  #      - PGDATA=/var/lib/postgresql/data/pgdata/
+  #    logging:
+  #      driver: "json-file"
+  #      options:
+  #        max-size: 100m
+  #    #uncomment to expose a port to allow direct/external access to the DB, for debugging
+  #    #ports:
+  #    # - "2345:5432"
 
-   athens:
-     image: gomods/athens:v0.4.0
-     restart: always
-     ports:
-       - 3000:3000
-     volumes:
-       - ~/.demo-pv/athens:/usr/local/athens
-     environment:
-       - ATHENS_STORAGE_TYPE=disk
-       - ATHENS_DISK_STORAGE_ROOT=/usr/local/athens
+  #  athens:
+  #    image: gomods/athens:v0.4.0
+  #    restart: always
+  #    ports:
+  #      - 3000:3000
+  #    volumes:
+  #      - ~/.demo-pv/athens:/usr/local/athens
+  #    environment:
+  #      - ATHENS_STORAGE_TYPE=disk
+  #      - ATHENS_DISK_STORAGE_ROOT=/usr/local/athens
         
-   go:
-     build: ./golang/
-     image: cmyanko/golang:compose
+  #  go:
+  #    build: ./golang/
+  #    image: cmyanko/golang:compose

@@ -2,7 +2,7 @@ version: '3'
 services:
    nginx-proxy:
      build: ./nginx
-     image: 'cmyanko/sonatype_nginx-proxy:2.6.1'
+     image: 'cmyanko/sonatype_nginx-proxy:2.6.2'
      ports:
        - '443:443'
        - '5000:5000'
@@ -14,7 +14,8 @@ services:
      depends_on:
        - iq-server
        - nexus
-      
+# If memory is tight you can comment out the Nexus service, 
+# it's not needed to Demo IQ and SSC     
    nexus:
      image: 'sonatype/nexus3:3.18.0'
      volumes:
@@ -32,6 +33,26 @@ services:
      ports:
        - '8070:8070'
        - '8071:8071'
+
+   ssc:
+     image: 'fortifydocker/sscdemo'
+     ports:
+       - '8888:8080'
+     volumes:
+       - '~/.demo-pv/fortify:/fortify'
+     environment:
+       - SSC_MAX_MEM_MB=4096
+
+   intSvc:
+     build: ./intSvc
+     depends_on:
+       - ssc
+       - iq-server
+     ports:
+       - '8182:8182'
+     volumes:
+       - '~/demo-pv/intSvcWorkFolder:/home/nexus/.work'
+     image: 'cmyanko/nexus-ssc-integration:19.1.0.5'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      

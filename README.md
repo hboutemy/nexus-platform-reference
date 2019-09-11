@@ -1,6 +1,6 @@
-# Nexus Platform with Docker Support, behind Nginx
+# Nexus Platform with Docker Support, behind Nginx with Software Security Center
 
-This is a template for deploying Nexus Repository Manager and IQ Server behind an NGINX proxy to offload SSL using Docker Compose
+This is a template for deploying Nexus Repository Manager and IQ Server behind an NGINX proxy to offload SSL using Docker Compose. It also adds the our intyegrations service with Fortify SSC. In order to to retrieve the docker image for SSC you need to be logged into Docker and have access to the fortifydocker/sscdemo image. Yopu'll also need to provide a Fortify license file
 
 I also add a few aliases to my /etc/hosts file to simulate DNS from outside of docker host but the apps are accessible over http wtihout them. If you're on Windows the file is here, c:\windows\system32\drivers\etc\hosts.
 
@@ -14,10 +14,13 @@ In addition to Docker Desktop, I recommend installing Kitematic to help with man
 
 I run Jenkins outside of Docker (local app) which allow it to hit the Nexus repo through Nginx so Docker repos work. Jenkins is also in the docker-compose file but commented out for now. It is set to use the same jenkins work folder so you can even swithc back and forth.
 
-The demo-setup script is a one time script to config docker and npm within NXRM; prior to running, review the docker-compose file and the persistent volume mounts. They are set to work on a linux machine and will need to be changed for a windows based machine. If you look at the script you can see it starts the environmetn with a docker-compose up -d and then creates and runs a few setup scripts once NXRM is responding to traffic.
+The demo-setup script is a one time script to config docker and npm within NXRM; prior to running, review the docker-compose file and the persistent volume mounts. They are set to work on a linux machine and will need to be changed for a windows based machine. If you look at the script you can see it starts the environment with a docker-compose up -d and then creates and runs a few setup scripts once NXRM is responding to traffic.
+
 ```
 ./demo-setup.sh
 ```
+
+During the first start, you'll need to copy a fortify.license file into the ~/.demo-pv/fortify folder. Use kitematic to check the logs of the ssc container. It should sit and wait for that license file on initial startup but it takes a while for the MySQL server to config on initial start as well.
 
 To stop, use docker-compose:
 
@@ -31,6 +34,12 @@ Subsequent runs can use docker-compose without the build for nginx or the need t
 docker-compose up -d
 ```
 
+You can also start and stop single services e.g.
+
+```
+docker-compose up -d ssc
+```
+
 ## URL's
 
 - Nexus Web UI with SSL accessible via https://repo.mycompany.com
@@ -38,6 +47,7 @@ docker-compose up -d
 - Docker proxy group registry accessible via https://registry.mycompany.com
 - Docker Private Registry accessible via https://registry.mycompany.com:5000  (docker push, not browser)
 - IQ Server accessible via http://localhost:8070 or https://iq-server.mycompany.com
+- Software Security Center is at http://localhost:8888
 
 ## Persistent Volumes
 
@@ -47,6 +57,7 @@ I've create a convention of putting all of the persistent volumes is a hidden fo
   + /iq-data
   + /iq-logs
   + /nexus-data
+  + /fortify
 ```
 It's not clear to me how these work on a windows machine but check your settings for shared drives in Docker Settings. For info check out Getting Started at: https://docs.docker.com/docker-for-windows/
 

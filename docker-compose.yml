@@ -16,13 +16,13 @@ services:
   #     - nexus
 # If memory is tight you can comment out the Nexus service, 
 # it's not needed to Demo IQ and SSC     
-  #  nexus:
-  #    image: 'sonatype/nexus3:3.18.0'
-  #    volumes:
-  #      - '~/.demo-pv/nexus-data:/nexus-data'
-  #    ports:
-  #      - '8081:8081'
-  #      - '18443:18443'
+   nexus:
+     image: 'sonatype/nexus3:3.18.0'
+     volumes:
+       - '~/.demo-pv/nexus-data:/nexus-data'
+     ports:
+       - '8081:8081'
+       - '18443:18443'
 
    iq-server:
      image: 'cmyanko/my-iq-server:1.71.0'
@@ -52,7 +52,7 @@ services:
        - '8182:8182'
      volumes:
        - '~/.demo-pv/intSvcWorkFolder:/home/nexus/.work'
-     image: 'cmyanko/nexus-ssc-integration:19.1.0.5'
+     image: 'cmyanko/nexus-ssc-integration:19.1.0.6'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      

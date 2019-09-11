@@ -13,7 +13,7 @@ services:
        - daemon off;
      depends_on:
        - iq-server
-       - nexus
+  #     - nexus
 # If memory is tight you can comment out the Nexus service, 
 # it's not needed to Demo IQ and SSC     
   #  nexus:

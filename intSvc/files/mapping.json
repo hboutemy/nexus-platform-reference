@@ -20,7 +20,7 @@
     {
       "sonatypeProject": "webgoat8",
       "sonatypeProjectStage": "build",
-      "fortifyApplication": "Webgoat8",
-      "fortifyApplicationVersion": "1.0"
+      "fortifyApplication": "Bill Payment Processor",
+      "fortifyApplicationVersion": "1.1"
     }
 ]

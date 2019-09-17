@@ -51,7 +51,7 @@ services:
      ports:
        - '8182:8182'
      volumes:
-       - '~/.demo-pv/intSvcWorkFolder:/home/nexus/.work'
+       - '~/.demo-pv/intSvcWorkFolder:/home/nexus/work'
      image: 'cmyanko/nexus-ssc-integration:19.1.0.5'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker

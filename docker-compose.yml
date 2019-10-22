@@ -30,20 +30,20 @@ services:
        - '~/.demo-pv/iq-data:/sonatype-work'
        - '~/.demo-pv/iq-logs:/opt/sonatype/nexus-iq-server/log'
      ports:
-       - '8070:8070'
+       - '8070:8070' 
        - '8071:8071'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      
-  # jenkins:
-  #   image: jenkinsci/blueocean
-  #   user: root
-  #   volumes:
-  #     - '~/.jenkins:/var/jenkins_home'
-  #     - '/var/run/docker.sock:/var/run/docker.sock'
-  #   ports:
-  #     - '8080:8080'
-  #     - '50000:50000'
+   jenkins:
+     image: jenkinsci/blueocean
+     user: root
+     volumes:
+       - '~/.jenkins:/var/jenkins_home'
+       - '/var/run/docker.sock:/var/run/docker.sock'
+     ports:
+       - '8080:8080'
+       - '50000:50000'
 
   # listener:
   #   image: my-webhook-listener:1.0.0

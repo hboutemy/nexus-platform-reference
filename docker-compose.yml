@@ -17,7 +17,7 @@ services:
 # If memory is tight you can comment out the Nexus service, 
 # it's not needed to Demo IQ and SSC     
    nexus:
-     image: 'sonatype/nexus3:3.18.0'
+     image: 'sonatype/nexus3:3.19.1'
      volumes:
        - '~/.demo-pv/nexus-data:/nexus-data'
      ports:
@@ -25,7 +25,7 @@ services:
        - '18443:18443'
 
    iq-server:
-     image: 'cmyanko/my-iq-server:1.75.0'
+     image: 'cmyanko/my-iq-server:1.76.0'
      build: ./iq-server
      volumes:
        - '~/.demo-pv/iq-data:/sonatype-work'

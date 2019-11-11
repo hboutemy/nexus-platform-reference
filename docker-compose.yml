@@ -44,6 +44,20 @@ services:
      ports:
        - '8080:8080'
        - '50000:50000'
+# Clair Local scans
+   db:
+     image: arminc/clair-db:2019-11-11
+     ports:
+       - '5432:5432'
+   clair:
+     image: arminc/clair-local-scan:v2.0.8_fe9b059d930314b54c78f75afe265955faf4fdc1
+     ports:
+       - '6060:6060'
+     links:
+       - db:postgres
+     depends_on:
+       - db
+
 
   # listener:
   #   image: my-webhook-listener:1.0.0

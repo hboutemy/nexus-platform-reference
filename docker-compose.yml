@@ -25,7 +25,7 @@ services:
        - '18443:18443'
 
    iq-server:
-     image: 'cmyanko/my-iq-server:1.79.0'
+     image: 'cmyanko/my-iq-server:1.80.0'
      build: ./iq-server
      volumes:
        - '~/.demo-pv/iq-data:/sonatype-work'

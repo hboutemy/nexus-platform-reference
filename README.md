@@ -12,7 +12,7 @@ I also add a few aliases to my /etc/hosts file to simulate DNS from outside of d
 
 In addition to Docker Desktop, I recommend installing Kitematic to help with managing containers and seeing into logs. https://github.com/docker/kitematic/releases
 
-I run Jenkins outside of Docker (local app) which allow it to hit the Nexus repo through Nginx so Docker repos work. Jenkins is also in the docker-compose file but commented out for now. It is set to use the same jenkins work folder so you can even swithc back and forth.
+I run Jenkins outside of Docker (local app) which allow it to hit the Nexus repo through Nginx so Docker repos work. Jenkins is also in the docker-compose file but commented out for now. It is set to use the same jenkins work folder so you can even switch back and forth.
 
 The demo-setup script is a one time script to config docker and npm within NXRM; prior to running, review the docker-compose file and the persistent volume mounts. They are set to work on a linux machine and will need to be changed for a windows based machine. If you look at the script you can see it starts the environmetn with a docker-compose up -d and then creates and runs a few setup scripts once NXRM is responding to traffic.
 ```

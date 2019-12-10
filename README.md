@@ -10,7 +10,7 @@ I also add a few aliases to my /etc/hosts file to simulate DNS from outside of d
 
 ## Operations
 
-In addition to Docker Desktop, I recommend installing Kitematic to help with managiong containers and seeing into logs. https://github.com/docker/kitematic/releases
+In addition to Docker Desktop, I recommend installing Kitematic to help with managing containers and seeing into logs. https://github.com/docker/kitematic/releases
 
 I run Jenkins outside of Docker (local app) which allow it to hit the Nexus repo through Nginx so Docker repos work. Jenkins is also in the docker-compose file but commented out for now. It is set to use the same jenkins work folder so you can even swithc back and forth.
 
@@ -25,7 +25,7 @@ To stop, use docker-compose:
 docker-compose down
 ```
 
-Subsequent runs can use docker-compose without the build for nginx or the need to create the persistent folders:
+Subsequent runs can use docker-compose and don't the demo-setup.sh :
 
 ```
 docker-compose up -d

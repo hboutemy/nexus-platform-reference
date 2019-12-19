@@ -37,7 +37,7 @@ services:
      volumes:
        - '~/.demo-pv/jira-data:/var/atlassian/application-data/jira'
      ports:
-       - '9080:8080'
+       - '8080:8080'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      
@@ -48,7 +48,7 @@ services:
        - '~/.jenkins:/var/jenkins_home'
        - '/var/run/docker.sock:/var/run/docker.sock'
      ports:
-       - '8080:8080'
+       - '9080:8080'
        - '50000:50000'
 # # Clair Local scans
 #    db:

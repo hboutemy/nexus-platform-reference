@@ -32,6 +32,12 @@ services:
      ports:
        - '8070:8070' 
        - '8071:8071'
+   jira:
+     image: 'atlassian/jira-software:8.6.0'
+     volumes:
+       - '~/.demo-pv/jira-data:/var/atlassian/application-data/jira'
+     ports:
+       - '9080:8080'
 
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      
@@ -44,37 +50,37 @@ services:
      ports:
        - '8080:8080'
        - '50000:50000'
-# Clair Local scans
-   db:
-     image: arminc/clair-db:2019-11-11
-     ports:
-       - '5432:5432'
-   clair:
-     image: arminc/clair-local-scan:v2.0.8_fe9b059d930314b54c78f75afe265955faf4fdc1
-     ports:
-       - '6060:6060'
-     links:
-       - db:postgres
-     depends_on:
-       - db
+# # Clair Local scans
+#    db:
+#      image: arminc/clair-db:2019-11-11
+#      ports:
+#        - '5432:5432'
+#    clair:
+#      image: arminc/clair-local-scan:v2.0.8_fe9b059d930314b54c78f75afe265955faf4fdc1
+#      ports:
+#        - '6060:6060'
+#      links:
+#        - db:postgres
+#      depends_on:
+#        - db
 
 
-  # listener:
-  #   image: my-webhook-listener:1.0.0
-  #   build: ./listener
-  #   volumes:
-  #     - /usr/local/bin/docker:/usr/bin/docker
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   ports:
-  #     - "9000:9000"
-  #   command:
-  #     - -verbose 
-  #     - -hotreload
-  #     - -hooks=/etc/webhook/test.json
-  #     - -hooks=/etc/webhook/dockerHub-scan.json
-  #     - -hooks=/etc/webhook/nxrm-consume.json
-  #     - -hooks=/etc/webhook/iq-consume.json
-  #     - -hooks=/etc/webhook/quay-consume.json
+#    listener:
+#      image: my-webhook-listener:1.0.0
+#      build: ./listener
+#      volumes:
+#        - /usr/local/bin/docker:/usr/bin/docker
+#        - /var/run/docker.sock:/var/run/docker.sock
+#      ports:
+#        - "9000:9000"
+#      command:
+#        - -verbose 
+#        - -hotreload
+#        - -hooks=/etc/webhook/test.json
+#        - -hooks=/etc/webhook/dockerHub-scan.json
+#        - -hooks=/etc/webhook/nxrm-consume.json
+#        - -hooks=/etc/webhook/iq-consume.json
+#        - -hooks=/etc/webhook/quay-consume.json
 
   #  victoria:
   #    image: 'victoria:1.0.0-60'

@@ -1,11 +1,11 @@
 # Nexus Platform with Docker Support, behind Nginx
 
-This is a template for deploying Nexus Repository Manager and IQ Server behind an NGINX proxy to offload SSL using Docker Compose
+This is a template for deploying Nexus Repository Manager and IQ Server behind an NGINX proxy to offload SSL using Docker Compose. Additional itegrations are also in this reference but are be commented out to simplify the initial experience.
 
 I also add a few aliases to my /etc/hosts file to simulate DNS from outside of docker host but the apps are accessible over http wtihout them. If you're on Windows the file is here, c:\windows\system32\drivers\etc\hosts.
 
 ```
-127.0.0.1      localhost iq-server.mycompany.com repo.mycompany.com registry.mycompany.com
+127.0.0.1      localhost iq-server.mycompany.com repo.mycompany.com registry.mycompany.com jira
 ```
 
 ## Operations
@@ -65,4 +65,4 @@ Working examples of how to provision a new blobstore and create docker repos usi
 
 ## Advanced
 
-There are additional services defined within the docker-compose file but commented out to ease getting started. In addition to Jenkins, that weas mentioned early there are also services defined for Victoria, Anchore, and the Webhook Listener.
+There are additional services defined within the docker-compose file but commented out to ease getting started. In addition to Jenkins, that weas mentioned early there are also services defined for Victoria, Clare, Anchore, JIRA, and the Webhook Listener.

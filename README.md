@@ -1,6 +1,6 @@
 # Nexus Platform with Docker Support, behind Nginx
 
-This is a template for deploying Nexus Repository Manager and IQ Server behind an NGINX proxy to offload SSL using Docker Compose. Additional itegrations are also in this reference but are be commented out to simplify the initial experience.
+This is a template for deploying Nexus Repository Manager and Nexus IQ Server behind an NGINX proxy to offload SSL using Docker Compose. Additional itegrations are also in this reference but are be commented out to simplify the initial experience.
 
 I also add a few aliases to my /etc/hosts file to simulate DNS from outside of docker host but the apps are accessible over http wtihout them. If you're on Windows the file is here, c:\windows\system32\drivers\etc\hosts.
 
@@ -14,7 +14,7 @@ In addition to Docker Desktop, I recommend installing Kitematic to help with man
 
 I run Jenkins outside of Docker (local app) which allow it to hit the Nexus repo through Nginx so Docker repos work. Jenkins is also in the docker-compose file but commented out for now. It is set to use the same jenkins work folder so you can even switch back and forth.
 
-The demo-setup script is a one time script to config docker and npm within NXRM; prior to running, review the docker-compose file and the persistent volume mounts. They are set to work on a linux machine and will need to be changed for a windows based machine. If you look at the script you can see it starts the environmetn with a docker-compose up -d and then creates and runs a few setup scripts once NXRM is responding to traffic.
+The `demo-setup.sh` script is a one time script to config docker and npm within NXRM; prior to running, review the `docker-compose.yml` file and the persistent volume mounts. They are set to work on a linux machine and will need to be changed for a windows based machine. If you look at the script you can see it starts the environment with a `docker-compose up -d` and then creates and runs a few setup scripts once NXRM is responding to traffic.
 ```
 ./demo-setup.sh
 ```
@@ -25,7 +25,7 @@ To stop, use docker-compose:
 docker-compose down
 ```
 
-Subsequent runs can use docker-compose and don't the demo-setup.sh :
+Subsequent runs can use docker-compose and don't the demo-setup.sh:
 
 ```
 docker-compose up -d
@@ -33,15 +33,15 @@ docker-compose up -d
 
 ## URL's
 
-- Nexus Web UI with SSL accessible via https://repo.mycompany.com
-- Nexus Web UI over http via http://localhost:8081
+- Nexus Repo Web UI with SSL accessible via https://repo.mycompany.com
+- Nexus Repo Web UI over http via http://localhost:8081
 - Docker proxy group registry accessible via https://registry.mycompany.com
 - Docker Private Registry accessible via https://registry.mycompany.com:5000  (docker push, not browser)
-- IQ Server accessible via http://localhost:8070 or https://iq-server.mycompany.com
+- Nexus IQ Server accessible via http://localhost:8070 or https://iq-server.mycompany.com
 
 ## Persistent Volumes
 
-I've create a convention of putting all of the persistent volumes is a hidden folder in the my home folder
+I've created a convention of putting all of the persistent volumes in a hidden folder in my home folder
 ```
 ~/.demo-pv
   + /iq-data
@@ -52,7 +52,7 @@ It's not clear to me how these work on a windows machine but check your settings
 
 ## IQ Server Configuration
 
-There is a config.yml in the IQ-Server folder which is where you can customize the config to work with a SMTP, JIRA and Proxy servers.
+There is a `config.yml` in the `iq-server` folder which is where you can customize the config to work with SMTP, JIRA and Proxy servers.
 
 ## SSL Certificates
 
@@ -65,4 +65,4 @@ Working examples of how to provision a new blobstore and create docker repos usi
 
 ## Advanced
 
-There are additional services defined within the docker-compose file but commented out to ease getting started. In addition to Jenkins, that weas mentioned early there are also services defined for Victoria, Clare, Anchore, JIRA, and the Webhook Listener.
+There are additional services defined within the docker-compose file but commented out to ease getting started. In addition to Jenkins that was mentioned earlie, there are also services defined for Victoria, Clair, Anchore, JIRA, and Webhook Listener examples.

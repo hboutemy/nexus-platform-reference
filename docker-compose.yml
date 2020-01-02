@@ -32,8 +32,10 @@ services:
      ports:
        - '8070:8070' 
        - '8071:8071'
+
+# see Nexus IQ for Jira https://help.sonatype.com/integrations/nexus-iq-for-jira
    jira:
-     image: 'atlassian/jira-software:8.6.0'
+     image: 'atlassian/jira-software:8.6.0' # https://hub.docker.com/r/atlassian/jira-software
      volumes:
        - '~/.demo-pv/jira-data:/var/atlassian/application-data/jira'
      ports:
@@ -42,7 +44,7 @@ services:
 # Docker based build jobs that want to use NXRM need to be outside of docker
 # network so they can hit the Nginx server for ingress and routing.      
    jenkins:
-     image: jenkinsci/blueocean
+     image: jenkinsci/blueocean # https://hub.docker.com/r/jenkinsci/blueocean
      user: root
      volumes:
        - '~/.jenkins:/var/jenkins_home'
@@ -50,8 +52,10 @@ services:
      ports:
        - '9080:8080'
        - '50000:50000'
-# # Clair Local scans
+
+# # Clair Local scans https://hub.docker.com/r/arminc/clair-local-scan
 #    db:
+#      # near-daily updates https://hub.docker.com/r/arminc/clair-db/tags
 #      image: arminc/clair-db:2019-11-11
 #      ports:
 #        - '5432:5432'

@@ -54,7 +54,7 @@ services:
        - '50000:50000'
 
 # # Clair Local scans https://hub.docker.com/r/arminc/clair-local-scan
-#    db:
+#    clair-db:
 #      # near-daily updates https://hub.docker.com/r/arminc/clair-db/tags
 #      image: arminc/clair-db:2019-11-11
 #      ports:
@@ -64,9 +64,9 @@ services:
 #      ports:
 #        - '6060:6060'
 #      links:
-#        - db:postgres
+#        - clair-db:postgres
 #      depends_on:
-#        - db
+#        - clair-db
 
 
 #    listener:
